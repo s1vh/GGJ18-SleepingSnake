@@ -13,7 +13,8 @@ public class SnakeModule : MonoBehaviour {
     //[SerializeField]
     //private Color color;
     [SerializeField]
-    float margin = 0.1f;
+    private float margin = 0.1f;
+    private Vector3 scale;
     [SerializeField]
     private int tpIndex;
     private bool isLast;
@@ -29,6 +30,7 @@ public class SnakeModule : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        scale = this.transform.localScale;
         if (this.gameObject == head && prevModule == null) { SetPrevModule(head); tpIndex = 0; }
     }
 
@@ -59,7 +61,12 @@ public class SnakeModule : MonoBehaviour {
     {
         if (this.gameObject != head)
         {
-            if (AskForContinuity())
+            if (isLast)
+            {
+                this.transform.position = new Vector3(prevModule.transform.position.x, prevModule.transform.position.y, prevModule.transform.position.z);
+                tpIndex = prevModule.GetComponent<SnakeModule>().AskForTp();
+            }
+            else if (AskForContinuity())
             {
                 if (Vector3.Distance(this.transform.position, prevModule.transform.position) > tolerance)
                 {
@@ -68,15 +75,13 @@ public class SnakeModule : MonoBehaviour {
             }
             else
             {
-                if (Vector3.Distance(this.transform.position, prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex)) >= tolerance)
+                if (true)
                 {
-                    this.GetComponent<Rigidbody2D>().velocity = snakeHead.currentVelocity * Vector3.Distance(this.transform.position, prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex)) / tolerance * Vector3.Normalize(prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex) - this.transform.position);
+                    if (Vector3.Distance(this.transform.position, prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex)) >= tolerance)
+                    {
+                        this.GetComponent<Rigidbody2D>().velocity = snakeHead.currentVelocity * Vector3.Distance(this.transform.position, prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex)) / tolerance * Vector3.Normalize(prevModule.GetComponent<SnakeModule>().ReadLastPosition(tpIndex) - this.transform.position);
+                    }
                 }
-                /*else
-                {
-                    this.transform.position = new Vector3(prevModule.transform.position.x, prevModule.transform.position.y, prevModule.transform.position.z);
-                    tpIndex = prevModule.GetComponent<SnakeModule>().AskForTp();
-                }*/
             }
         }
 	}
@@ -101,46 +106,31 @@ public class SnakeModule : MonoBehaviour {
         float y_margin = margin;
         if (col.tag == "Corner")
         {
-            SaveCurrentPosition(tpIndex);
+            SaveCurrentPosition();
             tpIndex++;
             if (this.transform.position.x < 0) { x_margin = x_margin * -1; }
             if (this.transform.position.y < 0) { y_margin = y_margin * -1; }
             this.transform.position = new Vector3(-this.transform.position.x + x_margin, -this.transform.position.y + y_margin, this.transform.position.z);
-            //if (isLast) { NormalizeModulesStatus(); }
         }
         else if (col.tag == "XBorder")
         {
-            SaveCurrentPosition(tpIndex);
+            SaveCurrentPosition();
             tpIndex++;
             if (this.transform.position.x < 0) { x_margin = x_margin * -1; }
             this.transform.position = new Vector3(-this.transform.position.x + x_margin, this.transform.position.y, this.transform.position.z);
-            //if (isLast) { NormalizeModulesStatus(); }
         }
         else if (col.tag == "YBorder")
         {
-            SaveCurrentPosition(tpIndex);
+            SaveCurrentPosition();
             tpIndex++;
             if (this.transform.position.y < 0) { y_margin = y_margin * -1; }
             this.transform.position = new Vector3(this.transform.position.x, -this.transform.position.y + y_margin, this.transform.position.z);
-            //if (isLast) { NormalizeModulesStatus(); }
         }
-        /*else if (col.gameObject == prevModule)
-        {
-            prevModule.GetComponent<SnakeModule>().RefreshSavedPosition(true);
-        }*/
     }
 
-    private void SaveCurrentPosition(int index)
+    private void SaveCurrentPosition()
     {
         Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        /*if (savedTpPoints[index] == null)
-        {
-            savedTpPoints.Add(position);
-        }
-        else
-        {
-            savedTpPoints[index] = position;
-        }*/
         savedTpPoints.Add(position);
     }
 
@@ -180,7 +170,7 @@ public class SnakeModule : MonoBehaviour {
         isLast = last;
     }
 
-    /*public void NormalizeModulesStatus()    // Recursive!
+    /*public void NormalizeModulesStatus()    // Recursive check on the snake modules!
     {
         if (this.gameObject != head && Vector3.Distance(this.transform.position, prevModule.transform.position) <= tolerance)
         {
@@ -192,5 +182,12 @@ public class SnakeModule : MonoBehaviour {
     public void TurnOff()
     {
         this.gameObject.tag = "Free";
+    }
+
+    public void ResizeModule(float factor)
+    {
+        if (factor < 0.1f) { factor = 0.1f; }
+        this.transform.localScale = new Vector3(scale.x, scale.y, scale.z) * factor;
+        tolerance = prevModule.GetComponent<CircleCollider2D>().radius * 2f * factor;
     }
 }

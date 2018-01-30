@@ -29,6 +29,8 @@ public class SnakeHead : MonoBehaviour {
     private float angleWidth = 4f;
     [SerializeField]
     private float tickTime = 2f;
+    [SerializeField]
+    private float resizeFactor = 1f;
 
     private float tickTimer;
     private GameObject thisModule;
@@ -87,6 +89,9 @@ public class SnakeHead : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        // Resize the snake
+        ResizeSnake(snake, resizeFactor);
+
         // Handle timers
         tickTimer += Time.smoothDeltaTime;
         if (tickTimer >= tickTime)
@@ -109,10 +114,10 @@ public class SnakeHead : MonoBehaviour {
         this.GetComponent<Rigidbody2D>().velocity = this.transform.up * currentVelocity;
     }
 
-    /*private void LateUpdate ()
+    private void LateUpdate ()
     {
         // Draw a line between the snake modules
-        lineRenderer.sortingOrder = 1;
+        /*lineRenderer.sortingOrder = 1;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.material.color = Color.green;
         lineRenderer.startWidth = 0.4f;
@@ -123,8 +128,8 @@ public class SnakeHead : MonoBehaviour {
         {
             lineRenderer.SetPosition(i, snake[i].gameObject.GetComponent<SnakeModule>().GetParsePosition());
             i++;
-        }
-    }*/
+        }*/
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -152,5 +157,15 @@ public class SnakeHead : MonoBehaviour {
         newModule.GetComponent<SnakeModule>().SetLastStatus(true);
         lastModule = newModule;
         snake.Add(lastModule);
+    }
+
+    private void ResizeSnake(List<GameObject> list, float factor)
+    {
+        int i = 0;
+        while (i < list.Count - 1)
+        {
+            i++;
+            list[list.Count - i].GetComponent<SnakeModule>().ResizeModule(Mathf.Log10(factor * i));
+        }
     }
 }
