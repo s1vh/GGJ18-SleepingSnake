@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 120119612720004238}
   m_Layer: 0
   m_Name: SnakeModule
-  m_TagString: Body
+  m_TagString: Inactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,9 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2decbedd2b33c94b9d09905b2272762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.45098042, b: 0.011764707, a: 0}
   margin: 0.1
-  tpSwitch: 0
+  tpIndex: 0
 --- !u!120 &120119612720004238
 LineRenderer:
   m_ObjectHideFlags: 1

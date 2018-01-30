@@ -11,6 +11,7 @@ TagManager:
   - Free
   - Body
   - Manager
+  - Inactive
   layers:
   - Default
   - TransparentFX

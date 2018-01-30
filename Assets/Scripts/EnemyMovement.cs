@@ -34,8 +34,8 @@ public class EnemyMovement : MonoBehaviour {
     {
         timer = 0f;
         enemyState = 0;
-        GetComponent<Collider2D>().enabled = false;
-	}
+        this.gameObject.tag = "Inactive";
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -48,7 +48,7 @@ public class EnemyMovement : MonoBehaviour {
                 timer = 0f;
                 if (enemyState == 0)
                 {
-                    GetComponent<Collider2D>().enabled = true;
+                    this.gameObject.tag = "Enemy";
                     enemyState = 1;
                 }
                 else { Object.Destroy(this.gameObject); }
@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour {
                     newAlpha = alpha * (deathDelay - timer) / deathDelay;
                     if (timer >= deathDelay * 0.5f)
                     {
-                        GetComponent<Collider2D>().enabled = false;
+                        this.gameObject.tag = "Inactive";
                     }
                 }
                 else if (enemyState == 0)
@@ -102,7 +102,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
+        if (col.tag == "Enemy" || col.tag == "Inactive")
         {
             enemyState = -1;
             timer = 0f;

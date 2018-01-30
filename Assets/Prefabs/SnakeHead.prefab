@@ -120,9 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2decbedd2b33c94b9d09905b2272762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
   margin: 0.1
-  tpSwitch: 0
+  tpCounter: 0
 --- !u!114 &114812080427063896
 MonoBehaviour:
   m_ObjectHideFlags: 1

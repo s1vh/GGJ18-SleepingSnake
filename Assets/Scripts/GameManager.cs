@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
             {
                 foreach (Collider2D col in colliders)
                 {
-                    if (col.tag == "Body" || col.tag == "Free" || col.tag == "Enemy" || col.tag == "Target")
+                    if (col.tag == "Body" || col.tag == "Free" || col.tag == "Enemy" || col.tag == "Target" || col.tag == "Inactive")
                     {
                         break;
                     }

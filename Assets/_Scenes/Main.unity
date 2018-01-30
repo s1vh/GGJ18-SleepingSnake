@@ -529,7 +529,7 @@ Prefab:
     - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
         type: 2}
       propertyPath: overcharge
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
         type: 2}
@@ -554,7 +554,7 @@ Prefab:
     - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
         type: 2}
       propertyPath: neckCount
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87bbb2ff69af30b46be34bc05956c453, type: 2}

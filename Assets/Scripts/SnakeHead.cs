@@ -13,11 +13,11 @@ public class SnakeHead : MonoBehaviour {
     public float sleepiness;
     public float currentVelocity;
 
-    private GameObject manager;
+    //private GameObject manager;
     [SerializeField]
     private int overcharge = 10;
     [SerializeField]
-    private int neckCount = 3;
+    private int neckCount = 1;
     [SerializeField]
     private float sleepGain = 1f;
     [SerializeField]
@@ -58,7 +58,7 @@ public class SnakeHead : MonoBehaviour {
         // Set up references
         thisModule = this.gameObject;
         lastModule = thisModule;
-        manager = GameObject.FindGameObjectWithTag("Manager");
+        //manager = GameObject.FindGameObjectWithTag("Manager");
         //lineRenderer = GetComponent<LineRenderer>();
 
         // Audio
@@ -73,7 +73,7 @@ public class SnakeHead : MonoBehaviour {
 
         sleepiness = 50f;
         tickTimer = 0;
-        if (neckCount > overcharge) { neckCount = overcharge; }
+        //if (neckCount > overcharge) { neckCount = overcharge; }
         snake.Add(this.gameObject);
         while (overcharge > 0)
         {
@@ -87,6 +87,7 @@ public class SnakeHead : MonoBehaviour {
                 Grow(true);
             }
             overcharge--;
+            //Grow();
         }
         bgm.Play();
         bgm.loop = true;
@@ -152,11 +153,13 @@ public class SnakeHead : MonoBehaviour {
         }
     }
 
-    private void Grow(bool solid)
+    private void Grow(bool active)
     {
         GameObject newModule = Instantiate(body, lastModule.transform.position, Quaternion.identity) as GameObject;
         newModule.GetComponent<SnakeModule>().SetPrevModule(lastModule);
-        if (!solid) { newModule.GetComponent<SnakeModule>().TurnOff(); }
+        lastModule.GetComponent<SnakeModule>().SetLastStatus(false);
+        if (!active) { newModule.GetComponent<SnakeModule>().TurnOff(); }
+        newModule.GetComponent<SnakeModule>().SetLastStatus(true);
         lastModule = newModule;
         snake.Add(lastModule);
     }
