@@ -8,7 +8,7 @@ public class SnakeHead : MonoBehaviour {
     public static SnakeHead instance = null;
 
     public GameObject body;
-    public Material snakeMaterial;
+    //public Material snakeMaterial;
     public float sleepiness;
     public float currentVelocity;
 

@@ -134,16 +134,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1778780933071188, guid: aeee28bc7bc8aac418835c1945725a11, type: 2}
-  snakeMaterial: {fileID: 2100000, guid: 604300c574837ec44b1be4ccb4c9ab72, type: 2}
   sleepiness: 0
   currentVelocity: 0
   overcharge: 10
   neckCount: 3
   sleepGain: 1
   caffeineGain: 25
-  fullVelocity: 7
+  fullVelocity: 5
   angleWidth: 4
-  tickTime: 0.25
+  tickTime: 0.33
   resizeFactor: 1
 --- !u!120 &120095643263469324
 LineRenderer:
