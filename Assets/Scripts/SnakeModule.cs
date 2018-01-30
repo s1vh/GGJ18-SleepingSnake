@@ -97,22 +97,32 @@ public class SnakeModule : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        float m_margin = margin;
-        if (col.tag == "XBorder")
+        float x_margin = margin;
+        float y_margin = margin;
+        if (col.tag == "Corner")
         {
             SaveCurrentPosition(tpIndex);
             tpIndex++;
-            if (this.transform.position.x < 0) { m_margin = m_margin * -1; }
-            this.transform.position = new Vector3(-this.transform.position.x + m_margin, this.transform.position.y, this.transform.position.z);
-            if (isLast) { NormalizeModulesStatus(); }
+            if (this.transform.position.x < 0) { x_margin = x_margin * -1; }
+            if (this.transform.position.y < 0) { y_margin = y_margin * -1; }
+            this.transform.position = new Vector3(-this.transform.position.x + x_margin, -this.transform.position.y + y_margin, this.transform.position.z);
+            //if (isLast) { NormalizeModulesStatus(); }
+        }
+        else if (col.tag == "XBorder")
+        {
+            SaveCurrentPosition(tpIndex);
+            tpIndex++;
+            if (this.transform.position.x < 0) { x_margin = x_margin * -1; }
+            this.transform.position = new Vector3(-this.transform.position.x + x_margin, this.transform.position.y, this.transform.position.z);
+            //if (isLast) { NormalizeModulesStatus(); }
         }
         else if (col.tag == "YBorder")
         {
             SaveCurrentPosition(tpIndex);
             tpIndex++;
-            if (this.transform.position.y < 0) { m_margin = m_margin * -1; }
-            this.transform.position = new Vector3(this.transform.position.x, -this.transform.position.y + m_margin, this.transform.position.z);
-            if (isLast) { NormalizeModulesStatus(); }
+            if (this.transform.position.y < 0) { y_margin = y_margin * -1; }
+            this.transform.position = new Vector3(this.transform.position.x, -this.transform.position.y + y_margin, this.transform.position.z);
+            //if (isLast) { NormalizeModulesStatus(); }
         }
         /*else if (col.gameObject == prevModule)
         {
@@ -170,14 +180,14 @@ public class SnakeModule : MonoBehaviour {
         isLast = last;
     }
 
-    public void NormalizeModulesStatus()    // Recursive!
+    /*public void NormalizeModulesStatus()    // Recursive!
     {
         if (this.gameObject != head && Vector3.Distance(this.transform.position, prevModule.transform.position) <= tolerance)
         {
             prevModule.GetComponent<SnakeModule>().SetTpStatus(tpIndex);
             prevModule.GetComponent<SnakeModule>().NormalizeModulesStatus();
         }
-    }
+    }*/
 
     public void TurnOff()
     {

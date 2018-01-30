@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
-    //private GameManager manager;
+    /*private GameManager gameManager;
+    private GameObject manager;*/
     private GameObject snake;
+
     [SerializeField]
     private float constantVelocity;
     private Quaternion newRotation;
@@ -25,7 +27,8 @@ public class EnemyMovement : MonoBehaviour {
     // Set up references
     void Awake()
     {
-        //manager = GetComponent<GameManager>();
+        /*manager = GameObject.FindGameObjectWithTag("Manager");
+        gameManager = manager.GetComponent<GameManager>();*/
         snake = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -110,7 +113,7 @@ public class EnemyMovement : MonoBehaviour {
         }
         /*else if (col.tag == "Body")
         {
-            manager.GameOver();
+            gameManager.GameOver();
             print("GAME OVER.");
         }*/
     }

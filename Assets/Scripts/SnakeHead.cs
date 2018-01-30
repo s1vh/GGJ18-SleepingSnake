@@ -7,13 +7,14 @@ public class SnakeHead : MonoBehaviour {
 
     public static SnakeHead instance = null;
 
-    public Object gameOverScene;    // Reference to the Game Over scene
     public GameObject body;
     public Material snakeMaterial;
     public float sleepiness;
     public float currentVelocity;
 
-    //private GameObject manager;
+    private GameManager gameManager;
+    private GameObject manager;
+
     [SerializeField]
     private int overcharge = 10;
     [SerializeField]
@@ -43,8 +44,6 @@ public class SnakeHead : MonoBehaviour {
     // Awake is always called before any Start functions
     void Awake ()
     {
-        //BuildSceneList();
-
         // Check if instance already exists and instances it if it doesn't
         if (instance == null)
         {
@@ -58,19 +57,14 @@ public class SnakeHead : MonoBehaviour {
         // Set up references
         thisModule = this.gameObject;
         lastModule = thisModule;
-        //manager = GameObject.FindGameObjectWithTag("Manager");
+        manager = GameObject.FindGameObjectWithTag("Manager");
+        gameManager = manager.GetComponent<GameManager>();
         //lineRenderer = GetComponent<LineRenderer>();
-
-        // Audio
-        bgmObj = GameObject.Find("AudioTheme");
-        bgm = bgmObj.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
     void Start ()
     {
-        //BuildSceneList();
-
         sleepiness = 50f;
         tickTimer = 0;
         //if (neckCount > overcharge) { neckCount = overcharge; }
@@ -87,10 +81,7 @@ public class SnakeHead : MonoBehaviour {
                 Grow(true);
             }
             overcharge--;
-            //Grow();
         }
-        bgm.Play();
-        bgm.loop = true;
     }
 	
 	// Update is called once per frame
@@ -147,8 +138,7 @@ public class SnakeHead : MonoBehaviour {
         }
         else if (col.tag == "Enemy" || col.tag == "Body")
         {
-            SceneManager.LoadSceneAsync(gameOverScene.name);
-            //StartCoroutine(LoadSceneAsync(gameOverScene.name));
+            gameManager.GameOver();
             print("GAME OVER.");
         }
     }
@@ -163,26 +153,4 @@ public class SnakeHead : MonoBehaviour {
         lastModule = newModule;
         snake.Add(lastModule);
     }
-
-    // Build the level list, should be called once!
-    /*void BuildSceneList()
-    {
-        scenesInBuild = new List<string>();
-
-        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
-        {
-            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-            int lastSlash = scenePath.LastIndexOf("/");
-            scenesInBuild.Add(scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
-            print("Added: " + scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
-        }
-    }*/
-
-    // Loading coroutine
-    /*IEnumerator LoadSceneAsync(string scene)
-    {
-        m_AsyncLoaderCoroutine = SceneManager.LoadSceneAsync(scene);
-        m_AsyncLoaderCoroutine.allowSceneActivation = true;
-        yield return m_AsyncLoaderCoroutine;
-    }*/
 }

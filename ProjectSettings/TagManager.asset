@@ -12,6 +12,7 @@ TagManager:
   - Body
   - Manager
   - Inactive
+  - Corner
   layers:
   - Default
   - TransparentFX

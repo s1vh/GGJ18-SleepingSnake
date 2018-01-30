@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;  // Allows to manage scences
 public class ReturnManager : MonoBehaviour {
 
     public Object returnScene;    // Reference to the Game Over scene
-    private List<string> scenesInBuild = new List<string>();
-    private AsyncOperation m_AsyncLoaderCoroutine;
+    //private List<string> scenesInBuild = new List<string>();
+    //private AsyncOperation m_AsyncLoaderCoroutine;
 
     // Set up references
     void Awake()
     {
-        BuildSceneList();
+        //BuildSceneList();
     }
 
     // Use this for initialization
@@ -33,7 +33,7 @@ public class ReturnManager : MonoBehaviour {
     }
 
     // Build the level list, should be called once!
-    void BuildSceneList()
+    /*void BuildSceneList()
     {
         scenesInBuild = new List<string>();
 
@@ -44,13 +44,13 @@ public class ReturnManager : MonoBehaviour {
             scenesInBuild.Add(scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
             print("Added: " + scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
         }
-    }
+    }*/
 
     // Loading coroutine
-    IEnumerator LoadSceneAsync(string scene)
+    /*IEnumerator LoadSceneAsync(string scene)
     {
         m_AsyncLoaderCoroutine = SceneManager.LoadSceneAsync(scene);
         m_AsyncLoaderCoroutine.allowSceneActivation = true;
         yield return m_AsyncLoaderCoroutine;
-    }
+    }*/
 }

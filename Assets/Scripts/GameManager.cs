@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;  // Allows to manage scences
 
 public class GameManager : MonoBehaviour {
 
-    //public Object gameOverScene;    // Reference to the Game Over scene
+    public Object gameOverScene;    // Reference to the Game Over scene
     public GameObject Enemy;
     public GameObject Token;
 
@@ -29,21 +29,32 @@ public class GameManager : MonoBehaviour {
     private float radius;
     private Vector2 coordinates;
 
+    private GameObject bgmObj;
+    private AudioSource bgm;
+    //private List<string> scenesInBuild = new List<string>();
+    //private AsyncOperation m_AsyncLoaderCoroutine;
+
     // Set up references
     void Awake()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         tokens = GameObject.FindGameObjectsWithTag("Target");
+        
+        // Audio
+        bgmObj = GameObject.Find("AudioTheme");
+        bgm = bgmObj.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
     void Start ()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        //BuildSceneList();
+        bgm.Play();
+        bgm.loop = true;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         // Enemies
         if (enemies.Length >= EnemyCount)
@@ -102,8 +113,30 @@ public class GameManager : MonoBehaviour {
         return GameObject.FindGameObjectsWithTag(tag);
     }
 
-    /*public void GameOver()
+    // Build the level list, should be called once!
+    /*void BuildSceneList()
     {
-        SceneManager.LoadScene(gameOverScene.name);
+        scenesInBuild = new List<string>();
+
+        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            int lastSlash = scenePath.LastIndexOf("/");
+            scenesInBuild.Add(scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
+            print("Added: " + scenePath.Substring(lastSlash + 1, scenePath.LastIndexOf(".") - lastSlash - 1));
+        }
     }*/
+
+    // Loading coroutine
+    /*IEnumerator LoadSceneAsync(string scene)
+    {
+        m_AsyncLoaderCoroutine = SceneManager.LoadSceneAsync(scene);
+        m_AsyncLoaderCoroutine.allowSceneActivation = true;
+        yield return m_AsyncLoaderCoroutine;
+    }*/
+
+    public void GameOver()
+    {
+        SceneManager.LoadSceneAsync(gameOverScene.name);
+    }
 }
