@@ -17,6 +17,10 @@ public class FogController : MonoBehaviour {
     private float timer = 0f;
     private float x;
     private float y;
+    private float targetAlpha;
+    private float currentAlpha = 1f;
+    [SerializeField]
+    private float fillingFactor;
 
     // Set up references
     void Awake()
@@ -39,12 +43,26 @@ public class FogController : MonoBehaviour {
         while (timer >= 90) { timer -= 90; }
         x = width + factor * Mathf.Cos(timer);
         y = width + factor * Mathf.Sin(timer);
+        targetAlpha = player.GetComponent<SnakeHead>().sleepiness * 0.01f;
+        if (currentAlpha < targetAlpha)
+        {
+            currentAlpha += fillingFactor * Time.smoothDeltaTime;
+            if (currentAlpha > targetAlpha) { currentAlpha = targetAlpha; }
+        }
+        else if (currentAlpha > targetAlpha)
+        {
+            currentAlpha -= fillingFactor * Time.smoothDeltaTime;
+            if (currentAlpha < targetAlpha)
+            {
+                currentAlpha = targetAlpha;
+            }
+        }
     }
 
     // LateUpdate is called once before rendering
     private void LateUpdate()
     {
         transform.localScale = new Vector3(x, y, 1f);
-        image.canvasRenderer.SetAlpha(player.GetComponent<SnakeHead>().sleepiness * 0.01f);
+        image.canvasRenderer.SetAlpha(targetAlpha);
     }
 }

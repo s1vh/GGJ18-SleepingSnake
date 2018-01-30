@@ -154,6 +154,7 @@ MonoBehaviour:
   width: 0.26
   factor: 0.025
   velocity: 1
+  fillingFactor: 0.001
 --- !u!212 &212363539651469456
 SpriteRenderer:
   m_ObjectHideFlags: 1

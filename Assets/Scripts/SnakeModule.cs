@@ -100,7 +100,7 @@ public class SnakeModule : MonoBehaviour {
         else { lineRenderer.SetPosition(1, prevModule.GetComponent<SnakeModule>().GetLastPosition()); }
     }*/
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)   // when entering the same trigger too quickly, it still gets buggy!
     {
         float x_margin = margin;
         float y_margin = margin;

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   margin: 0.1
-  tpCounter: 0
+  tpIndex: 0
 --- !u!114 &114812080427063896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a50fadeca4b453448e62484de3808ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverScene: {fileID: 0}
   body: {fileID: 1778780933071188, guid: aeee28bc7bc8aac418835c1945725a11, type: 2}
   snakeMaterial: {fileID: 2100000, guid: 604300c574837ec44b1be4ccb4c9ab72, type: 2}
   sleepiness: 0
@@ -141,10 +140,11 @@ MonoBehaviour:
   overcharge: 10
   neckCount: 3
   sleepGain: 1
-  caffeineGain: 20
-  fullVelocity: 4
+  caffeineGain: 25
+  fullVelocity: 7
   angleWidth: 4
-  tickTime: 2
+  tickTime: 0.25
+  resizeFactor: 1
 --- !u!120 &120095643263469324
 LineRenderer:
   m_ObjectHideFlags: 1

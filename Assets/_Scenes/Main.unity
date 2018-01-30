@@ -251,42 +251,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: gameOverScene
-      value: 
-      objectReference: {fileID: 102900000, guid: 10b44d55359e48d40867f17598bfde7c,
-        type: 3}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: overcharge
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: tickTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: fullVelocity
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: caffeineGain
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: sleepGain
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114812080427063896, guid: 87bbb2ff69af30b46be34bc05956c453,
-        type: 2}
-      propertyPath: neckCount
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87bbb2ff69af30b46be34bc05956c453, type: 2}
   m_IsPrefabParent: 0
